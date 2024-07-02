@@ -25,9 +25,9 @@ public class ProfaneWord {
 
     private boolean profane;
 
-//    private LocalDateTime createdAt;
-//
-//    private LocalDateTime updatedAt;
+    private LocalDateTime createdAt;
+////
+    private LocalDateTime updatedAt;
 
     // Getters and Setters
     public Long getId() {

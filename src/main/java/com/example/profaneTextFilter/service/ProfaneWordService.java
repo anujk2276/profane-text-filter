@@ -68,8 +68,6 @@ public class ProfaneWordService {
                 ProfaneWord profaneWord = new ProfaneWord();
                 profaneWord.setWord(word);
                 profaneWord.setProfane(isProfane(word));
-                // profaneWord.setCreatedAt(LocalDateTime.now());
-                // profaneWord.setUpdatedAt(LocalDateTime.now());
                 profaneWordRepository.save(profaneWord);
             }
         }
@@ -103,7 +101,7 @@ public class ProfaneWordService {
         // Implement JSON parsing logic to check if the word is profane
         // This is a placeholder implementation and should be replaced with actual parsing logic
         // For example, using Jackson or any other JSON parsing library
-        if (responseBody.contains("\"found\":0")) {
+        if (responseBody.contains("\"found\":\"0\"")) {
             return false; // No profanity found
         } else {
             return true; // Profanity found or other condition
