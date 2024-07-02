@@ -1,13 +1,17 @@
-package com.example.profane_text_filter.model;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+package com.example.profaneTextFilter.model;
+// import org.springframework.boot.SpringApplication;
+// import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
+
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
+//// import java.time.LocalDateTime;
+//import javax.persistence.Table;
+
+// import javax.persistence.*;
 import java.time.LocalDateTime;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "profane_words")
@@ -21,9 +25,9 @@ public class ProfaneWord {
 
     private boolean profane;
 
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
+//    private LocalDateTime createdAt;
+//
+//    private LocalDateTime updatedAt;
 
     // Getters and Setters
     public Long getId() {
