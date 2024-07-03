@@ -47,6 +47,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import com.example.profaneTextFilter.repository.ProfaneWordRepository;
 import com.example.profaneTextFilter.model.ProfaneWord;
@@ -68,6 +69,8 @@ public class ProfaneWordService {
                 ProfaneWord profaneWord = new ProfaneWord();
                 profaneWord.setWord(word);
                 profaneWord.setProfane(isProfane(word));
+                profaneWord.setCreatedAt(LocalDateTime.now());
+                profaneWord.setUpdatedAt(LocalDateTime.now());
                 profaneWordRepository.save(profaneWord);
             }
         }

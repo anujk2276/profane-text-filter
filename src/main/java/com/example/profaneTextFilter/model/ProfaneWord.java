@@ -1,16 +1,6 @@
 package com.example.profaneTextFilter.model;
-// import org.springframework.boot.SpringApplication;
-// import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import jakarta.persistence.*;
-
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
-//// import java.time.LocalDateTime;
-//import javax.persistence.Table;
-
-// import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,21 +15,16 @@ public class ProfaneWord {
 
     private boolean profane;
 
-    private LocalDateTime createdAt;
-////
-    private LocalDateTime updatedAt;
+    private LocalDateTime created_at;
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
+    private LocalDateTime updated_at;
+
+    public void setCreatedAt(LocalDateTime created_at) {
+        this.created_at = created_at;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getWord() {
-        return word;
+    public void setUpdatedAt(LocalDateTime updated_at) {
+        this.updated_at = updated_at;
     }
 
     public void setWord(String word) {
@@ -55,11 +40,3 @@ public class ProfaneWord {
     }
 }
 
-// @SpringBootApplication
-// public class DemoApplication {
-
-// 	public static void main(String[] args) {
-// 		SpringApplication.run(DemoApplication.class, args);
-// 	}
-
-// }
