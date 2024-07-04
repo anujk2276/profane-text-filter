@@ -3,8 +3,11 @@ package com.example.profaneTextFilter.controller;
 import com.example.profaneTextFilter.service.ProfaneWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+import org.springframework.http.ResponseEntity;
+import java.util.Map;
 
 @RestController
 public class ProfaneWordController {
@@ -13,15 +16,8 @@ public class ProfaneWordController {
     private ProfaneWordService profaneWordService;
 
     @GetMapping("/process-profane-words")
-    public String processProfaneWords() {
-        List<String> wordsToProcess = fetchWordsToProcess();
-        profaneWordService.processWords(wordsToProcess);
-        return "Profane words processed successfully";
-    }
-
-    private List<String> fetchWordsToProcess() {
-        // Implement logic to fetch words that need to be processed
-        // For example, from a file, database, or API
-        return List.of("sample3", "sample4");
+    public ResponseEntity<Map<String, Boolean>> processProfaneWords(@RequestBody List<String> wordsToProcess) {
+        Map<String, Boolean> result = profaneWordService.processWords(wordsToProcess);
+        return ResponseEntity.ok(result);
     }
 }

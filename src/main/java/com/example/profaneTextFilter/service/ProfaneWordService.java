@@ -1,41 +1,3 @@
-//package com.example.profaneTextFilter.service;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//
-//import java.util.List;
-//import com.example.profaneTextFilter.repository.ProfaneWordRepository;
-//import com.example.profaneTextFilter.model.ProfaneWord;
-//
-//@Service
-//public class ProfaneWordService {
-//
-//    @Autowired
-//    private ProfaneWordRepository profaneWordRepository;
-//
-//    public void processWords(List<String> words) {
-//        for (String word : words) {
-//            if (!profaneWordRepository.existsByWord(word)) {
-//                ProfaneWord profaneWord = new ProfaneWord();
-//                profaneWord.setWord(word);
-//                profaneWord.setProfane(isProfane(word));
-//                // profaneWord.setCreatedAt(LocalDateTime.now());
-//                // profaneWord.setUpdatedAt(LocalDateTime.now());
-//                profaneWordRepository.save(profaneWord);
-//            }
-//        }
-//    }
-//
-//    private boolean isProfane(String word) {
-//        // Implement your logic to determine if the word is profane
-//        // For simplicity, let's assume a list of profane words
-//        List<String> profaneWords = List.of("badword1", "badword2", "badword3");
-//        return profaneWords.contains(word);
-//    }
-//}
-
-//this is the code relevant with web purify api
-
 package com.example.profaneTextFilter.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,9 +10,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import com.example.profaneTextFilter.repository.ProfaneWordRepository;
 import com.example.profaneTextFilter.model.ProfaneWord;
+import com.example.profaneTextFilter.config.WebPurifyConfig;
 
 @Service
 public class ProfaneWordService {
@@ -60,25 +27,39 @@ public class ProfaneWordService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String API_KEY = "14b3d07cc74e5e80e35c95ba37a4186b";
-    private static final String API_URL = "http://api1.webpurify.com/services/rest/";
+    @Autowired
+    private WebPurifyConfig webPurifyConfig;
 
-    public void processWords(List<String> words) {
+
+    public Map<String, Boolean> processWords(List<String> words) {
+        Map<String, Boolean> response = new HashMap<>();
+
         for (String word : words) {
-            if (!profaneWordRepository.existsByWord(word)) {
+            Optional<ProfaneWord> existingWord = profaneWordRepository.findByWord(word);
+            if (existingWord.isPresent()) {
+                response.put(word, existingWord.get().isProfane());
+            } else {
+                boolean isProfane = isProfane(word);
                 ProfaneWord profaneWord = new ProfaneWord();
                 profaneWord.setWord(word);
-                profaneWord.setProfane(isProfane(word));
+                profaneWord.setProfane(isProfane);
                 profaneWord.setCreatedAt(LocalDateTime.now());
                 profaneWord.setUpdatedAt(LocalDateTime.now());
                 profaneWordRepository.save(profaneWord);
+                response.put(word, isProfane);
             }
         }
+
+        return response;
     }
 
+
     private boolean isProfane(String word) {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(API_URL)
-                .queryParam("api_key", API_KEY)
+        String apiKey = webPurifyConfig.getApiKey();
+        String apiUrl = webPurifyConfig.getApiUrl();
+
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiUrl)
+                .queryParam("api_key", apiKey)
                 .queryParam("text", word)
                 .queryParam("format", "json");
 

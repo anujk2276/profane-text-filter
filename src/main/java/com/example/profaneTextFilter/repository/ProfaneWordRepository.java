@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.profaneTextFilter.model.ProfaneWord;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface ProfaneWordRepository extends JpaRepository<ProfaneWord, Long> {
-    boolean existsByWord(String word);
+    Optional<ProfaneWord> findByWord(String word);
 }
