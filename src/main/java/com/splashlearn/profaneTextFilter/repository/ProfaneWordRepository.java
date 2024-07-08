@@ -1,7 +1,7 @@
-package com.example.profaneTextFilter.repository;
+package com.splashlearn.profaneTextFilter.repository;
 
+import com.splashlearn.profaneTextFilter.model.ProfaneWord;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.profaneTextFilter.model.ProfaneWord;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
-package com.example.profaneTextFilter.controller;
+package com.splashlearn.profaneTextFilter.controller;
 
-import com.example.profaneTextFilter.service.ProfaneWordService;
+import com.splashlearn.profaneTextFilter.service.ProfaneWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;

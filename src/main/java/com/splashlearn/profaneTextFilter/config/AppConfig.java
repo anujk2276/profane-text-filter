@@ -1,4 +1,4 @@
-package com.example.profaneTextFilter.config;
+package com.splashlearn.profaneTextFilter.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

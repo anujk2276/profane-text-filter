@@ -8,7 +8,7 @@
 		<version>3.3.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>com.splashlearn</groupId>
 	<artifactId>profane-text-filter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
@@ -72,7 +72,7 @@
 	            <artifactId>spring-boot-maven-plugin</artifactId>
 	            <version>3.3.1</version>
 	            <configuration>
-	                <mainClass>com.example.profaneTextFilter.Application</mainClass>
+	                <mainClass>com.splashlearn.profaneTextFilter.Application</mainClass>
 	            </configuration>
 	        </plugin>
 	    </plugins>

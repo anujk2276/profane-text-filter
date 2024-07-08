@@ -1,4 +1,6 @@
-package com.example.profaneTextFilter.service;
+package com.splashlearn.profaneTextFilter.service;
+import com.splashlearn.profaneTextFilter.model.ProfaneWord;
+import com.splashlearn.profaneTextFilter.repository.ProfaneWordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,9 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.example.profaneTextFilter.repository.ProfaneWordRepository;
-import com.example.profaneTextFilter.model.ProfaneWord;
-import com.example.profaneTextFilter.config.WebPurifyConfig;
+import com.splashlearn.profaneTextFilter.config.WebPurifyConfig;
 
 @Service
 public class ProfaneWordService {
